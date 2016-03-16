@@ -10,7 +10,6 @@ router.use((req, res, next) => {
   next()
 })
 router.use('/', (req, res) => {
-  
 })
 router.use('/api/v1', api)
 export default router
