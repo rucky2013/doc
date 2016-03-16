@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="test"></button>
+    <button @click="test">提交</button>
   </div>
 </template>
 
@@ -10,9 +10,9 @@ export default {
     test: function () {
       console.log('come in !')
       this
-      .$http.get('api/test')
+      .$http.get('/api/v1/test')
       .then((res) => {
-        console.log(res.body)
+        console.log(res.data)
       },
       (err) => {
         console.log(err)

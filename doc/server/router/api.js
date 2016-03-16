@@ -15,5 +15,9 @@ api.use('/catalog/:catelogid/doc', (req, res) => {
 api.use('/doc/:docid', (req, res) => {
   
 })
+api.get('/test', (req,res) => {
+  console.log('success')
+  res.send({abc:'123'})
+})
 
 export default api
