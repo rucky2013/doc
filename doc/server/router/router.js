@@ -18,6 +18,7 @@ router.use('/list', list)
 router.use('/user', user)
 router.use('/dashboard', dashboard)
 router.get('/api/*', (req, res) => {
+  console.log('success')
   res.send('asd')
 })
 export default router
