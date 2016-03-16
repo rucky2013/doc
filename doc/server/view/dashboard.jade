@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  if info
+    h1=info
+  h1 控制台
+  div 新增用户
+  br
+  form(action="/user" method="post")
+    input(type='text', name='name'  placeholder='用户名')
+    br
+    br
+    input(type='text', name='phone'  placeholder='手机号')
+    br
+    br
+    input#password2(type='password', name='password2' placeholder='密码')
+    br
+    br
+    input(type='hidden' name='_csrf' value='#{csrfToken}')
+    input#password(type='hidden', name='password' value='username')
+    input(type='submit', value='新增')
+    script(src='/js/3rd/jquery.min.js')
+    script(src='/js/3rd/md5.js')
+    script(src='/js/site/dashboard.js')
+    

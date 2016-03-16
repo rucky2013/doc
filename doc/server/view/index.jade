@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  if locals.success
+    p(style='color:#5BEA61')=locals.success
+  if locals.error
+    p(style='color:red')=locals.error
+  if userInfo
+    h1 欢迎 #{userInfo.loginName} 同学
+    if userInfo.dlrCode
+      p 您的专营店编号为 #{userInfo.dlrCode}
+    p 您的用户类型为 #{userInfo.userType}
+    p 您的用户角色为 #{userInfo.roleCode}
+    a(href="/dashboard/") 控制台
+    a(href='/logout') 退出登录
+  else
+    h3 请登录后查看您的信息
+    form(action='/login', method='POST')
+      input(type='text', name='clientName'  placeholder=' 用户名')
+      input#password(type='password', name='password' placeholder='密码')
+      input(type='hidden' name='_csrf' value='#{csrfToken}')
+      input#clientPass(type='hidden', name='clientPass' value='username')
+      input(type='submit', value='提交')
+    script(src='/js/3rd/jquery.min.js')
+    script(src='/js/3rd/md5.js')
+    script(src='/js/site/index.js')
