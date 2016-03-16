@@ -1,9 +1,5 @@
 import {Router} from 'express'
-import index from './index'
-import list from './list'
-import user from './user'
-import dashboard from './dashboard'
-
+import api from './api'
 const router = Router()
 
 // 全局即时消息处理
@@ -14,10 +10,5 @@ router.use((req, res, next) => {
   next()
 })
 router.use('/', index)
-router.use('/list', list)
-router.use('/user', user)
-router.use('/dashboard', dashboard)
-router.get('/api/*', (req, res) => {
-  res.send('asd')
-})
+router.use('/api/v1', api)
 export default router
