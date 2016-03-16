@@ -9,6 +9,8 @@ router.use((req, res, next) => {
   req.session.msg = {}
   next()
 })
-router.use('/', index)
+router.use('/', (req, res) => {
+  
+})
 router.use('/api/v1', api)
 export default router
