@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div class="g-test">
+    <div class="m-test"></div>
     <button @click="test">提交</button>
   </div>
 </template>
 
 <script>
+require('normalize.css')
+
 export default {
   methods: {
     test: function () {
@@ -22,7 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 html {
   height: 100%;
 }
@@ -44,5 +47,14 @@ body {
 .logo {
   width: 100px;
   height: 100px
+}
+
+.g-test{
+  width: 100px;
+  height: 100px;
+  .m-test{
+    width: 50px;
+    height: 50px;
+  }
 }
 </style>
