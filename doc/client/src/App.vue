@@ -1,123 +1,56 @@
 <template>
-  <div class="g-body">
-    <div id="top" class="g-nav">
-      <div class="m-logo">
-        ~\(≧▽≦)/~I'm LOGO
-      </div>
-      <ul class="m-topNav">
-        <li><a v-link="{path:'/'}">主页</a></li>
-        <li v-if="status">
-          <a href="javascript:;" @click="login">登录</a>
-        </li>
-        <li v-if="status">
-          <a href="javascript:;" @click="regis">注册</a>
-        </li>
-        <li v-else>登出</li>
-      </ul>
-    </div>
-    <div class="g-wrap">
-      <h1 class="m-tit">NodeV</h1>
-      <router-view></router-view>
-    </div>
-    <l-window v-if="lStatus"></l-window>
-    <r-window v-if="rStatus"></r-window>  
+  <div id="app">
+    <img class="logo" src="./assets/logo.png">
+    <hello></hello>
+    <p>
+      Welcome to your Vue.js app. To get started, take a look at the
+      <a href="https://github.com/vuejs-templates/webpack#folder-structure" target="_blank">README</a>
+      of this template. If you have any issues with the setup, please file an issue at this template's repository.
+    </p>
+    <p>
+      For advanced configurations, checkout the docs for
+      <a href="http://webpack.github.io/" target="_blank">Webpack</a> and
+      <a href="http://vuejs.github.io/vue-loader/" target="_blank">vue-loader</a>.
+    </p>
+    <p>
+      You may also want to checkout
+      <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
+      <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
+    </p>
   </div>
 </template>
 
 <script>
-  import regis from './components/regisWindow'
-  import login from './components/loginWindow'
+import Hello from './components/Hello'
 
-  export default {
-    data () {
-      return {
-        status: true,
-        lStatus: false,
-        rStatus: false
-      }
-    },
-    methods: {
-      login () {
-        this.lStatus = true
-      },
-      regis () {
-        this.rStatus = true
-      }
-    },
-    events: {
-      'sWindow' (opt) {
-        this.lStatus = opt.status
-      },
-      'rWindow' (opt) {
-        this.rStatus = opt.status
-      }
-    },
-    components: {
-      'r-window': regis,
-      'l-window': login
-    }
+export default {
+  components: {
+    Hello
   }
+}
 </script>
 
-<style lang="less">
+<style>
 html {
   height: 100%;
 }
 
 body {
-  font-size: 62.5%;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 }
-.g-body{
-  height: 100%;
-  width: 100%;
-}
-.g-nav{
-  width: 100%;
-  height: 50px;
-  position: fixed;
-  border-bottom: 1px solid #D5D1D8;
-  box-shadow: 2px 0 2px #99969B;
-  background-image: url('../static/backlalala.png');
-  .m-logo{
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
-    float: left;
-    text-align: center;
-    font-weight: bold;
-    font-size: .8rem;
-    font-family: Microsoft YaHei;
-  }
-  .m-topNav{
-    float: right;
-    height: 50px;
-    line-height: 50px;
-    li{
-      float: left;
-      margin-right: 20px;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-      font-size: .8rem;
-    }
-  }
-}
-.g-wrap {
-  width: 100%;
-  height: 100%;
+
+#app {
+  margin-top: -100px;
+  max-width: 600px;
+  font-family: Helvetica, sans-serif;
   text-align: center;
-  .m-tit{
-    text-align: left;
-    text-indent: 5px;
-    display: inline-block;
-    width: 500px;
-    font-size:2.8rem;
-    font-family: Helvetica, sans-serif;
-    margin-top: 10%;
-    margin-bottom: 20px;
-  }
- } 
+}
+
+.logo {
+  width: 100px;
+  height: 100px
+}
 </style>
