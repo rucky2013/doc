@@ -1,6 +1,5 @@
 const checkLogin = (req, res, next)=>{
-  if (!req.session.user.accessToken) {
-    req.session.msg.error = '未登录'
+  if (!req.session.userId) {
     return res.redirect('/')
   }
   next()
