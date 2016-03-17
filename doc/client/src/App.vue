@@ -1,14 +1,17 @@
+
 <template lang="jade">
   div
-    button(@click="test") test
+    button(@click="test") 
 </template>
 
 <script>
+require('normalize.css')
+
 export default {
   methods: {
     test: function () {
       this
-      .$http.get('api/doc/1')
+      .$http.get('api/doc/1'
       .then((res) => {
         console.log(res.data)
       },
@@ -19,6 +22,7 @@ export default {
   }
 }
 </script>
+
 <style>
   html,body{
     height:100%;

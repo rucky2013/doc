@@ -23,5 +23,9 @@ api.get('/doc/:docid', (req, res) => {
   let doc = Doc.getDoc(docId)
   res.send(doc)
 })
+api.get('/test', (req,res) => {
+  console.log('success')
+  res.send({abc:'123'})
+})
 
 export default api
