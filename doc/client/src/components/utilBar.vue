@@ -1,0 +1,72 @@
+<template>
+  <div class="g-sideBar">
+    <div class="m-logo">
+      
+    </div>
+    <div class="m-body">
+      <a class="u-item iconfont" href="javascript:;" @click="docs">
+        &#x344e;
+      </a>
+      <a class="u-item iconfont" href="javascript:;">
+        &#xe681;
+      </a>
+    </div>
+    <a class="m-logout iconfont">
+      &#xe629;
+    </a>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    docs () {
+      this.$parent.status = !this.$parent.status
+    }
+  },
+  props: ['status']
+}
+</script>
+
+<style lang="less" scoped>
+.g-sideBar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  background: #f8f8f8;
+  box-shadow: 2px 0 2px #ececec;
+  padding: 10px 18px;
+  z-index: 9999;
+  .m-logo{
+    height: 80px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #FFF;
+  }
+  .m-body{
+    height: 450px;
+    padding: 20px 15px;
+    .u-item{
+      display: block;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+  }
+  .m-logout{
+    display: block;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 2rem;
+    border-top: 3px solid #fff;
+    padding-top: 10px;
+  }
+}
+</style>

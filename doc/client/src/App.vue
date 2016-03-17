@@ -1,43 +1,28 @@
-
-<template lang="jade">
-  div
-    button(@click="test") 
+<template>
+  <util-bar></util-bar>
+  <catalog :status="status"></catalog>
 </template>
 
 <script>
 require('normalize.css')
+require('../static/style/global.less')
+import utilBar from './components/utilBar'
+import catalog from './components/catalog'
 
 export default {
-  methods: {
-    test: function () {
-      this
-      .$http.get('api/doc/1'
-      .then((res) => {
-        console.log(res.data)
-      },
-      (err) => {
-        console.log(err)
-      })
+  data () {
+    return {
+      status: false
     }
+  },
+  computed: {
+    test () {
+      return this.status
+    }
+  },
+  components: {
+    'util-bar': utilBar,
+    'catalog': catalog
   }
 }
 </script>
-
-<style>
-  html,body{
-    height:100%;
-    text-align:center;
-  }
-</style>
-<style scoped lang="less">
-button {
-  border:1px solid red;
-  padding:10px 30px;
-  display:inline-block;
-  background:#fff;
-  color:red;
-  margin:100px auto;
-  outline:none;
-  cursor:pointer;
-}
-</style>
