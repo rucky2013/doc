@@ -1,4 +1,5 @@
 import express from 'express'
+import mysql from 'mysql'
 import log4js from "./lib/log.js"
 import favicon from 'serve-favicon'
 import logger from 'morgan'
@@ -7,11 +8,12 @@ import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import router from './router/router'
 import compression from 'compression'
-import session from 'express-session'
 import lessMiddleware from 'less-middleware'
+import session from 'express-session'
+const MySQLStore = require('express-mysql-session')(session)
 const path = require('path')
-let config = require('config')
-const RedisStore = require('connect-redis')(session)
+const config = require('config')
+
 
 let app = express()
 log4js.configure()
@@ -40,12 +42,15 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 //session 处理
 app.use(session({
-  store: new RedisStore(config.get('db')),
-  secret: 'abc123!!'
+  store: new MySQLStore(config.get('db')),
+  key:'e4sdoc',
+  secret: 'abc123!!',
+  resave: true,
+  saveUninitialized: true
 }));
 app.use((req, res, next) => {
   if (!req.session) {
-    return next(new Error('无法从 redis 拿到 session'));
+    return next(new Error('无法拿到 session'));
   }
   next()
 })

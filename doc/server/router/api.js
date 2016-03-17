@@ -9,7 +9,7 @@ api.post('/login', (req, res, next) => {
 })
 api.get('/catalog', (req, res) => {
   let userId = req.body.userid
-  let catalogs = Catalog.getByUserId(userId)
+  let catalogs = Catalog.getCatas(userId)
   res.send(catalogs)
 })
 api.get('/catalog/:catalogid/doc', (req, res) => {
