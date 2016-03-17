@@ -1,6 +1,24 @@
 module.exports = {
   server: 'http://172.26.141.121:9080/e4s-mp',
+  cookie_secret: 'abc123!!',
+  //数据库连接配置
   db: {
+    user: 'e4s_doc',
+    password: 'e4s_doc',
+    database: 'e4s_doc',
+    option: {
+      host: '172.26.136.192',
+      port: 8065,
+      dialect: 'mysql',
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+      }
+    }
+  },
+  //session 数据库配置
+  session_mysql: {
     host: '172.26.136.192',
     port: 8065,
     user: 'e4s_doc',

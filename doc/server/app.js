@@ -1,5 +1,4 @@
 import express from 'express'
-import mysql from 'mysql'
 import log4js from "./lib/log.js"
 import favicon from 'serve-favicon'
 import logger from 'morgan'
@@ -10,10 +9,9 @@ import router from './router/router'
 import compression from 'compression'
 import lessMiddleware from 'less-middleware'
 import session from 'express-session'
-const MySQLStore = require('express-mysql-session')(session)
 const path = require('path')
-const config = require('config')
-
+let config = require('config')
+// const MySQLStore = require('express-mysql-session')(session)
 
 let app = express()
 log4js.configure()
@@ -41,19 +39,26 @@ app.use(lessMiddleware(__dirname + '/public'));
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 //session 处理
+// app.use(session({
+//   store: new MySQLStore(config.get('db')),
+//   key:'e4sdoc',
+//   secret: 'abc123!!',
+//   resave: true,
+//   saveUninitialized: true
+// }));
 app.use(session({
-  store: new MySQLStore(config.get('db')),
-  key:'e4sdoc',
-  secret: 'abc123!!',
   resave: true,
-  saveUninitialized: true
-}));
+  saveUninitialized: true,
+  secret: config.get('cookie_secret')
+}))
 app.use((req, res, next) => {
   if (!req.session) {
     return next(new Error('无法拿到 session'));
   }
   next()
 })
+//回调用 promise
+app.use(require('express-promise')())
 // 路由
 app.use('/', router)
 /* 404 && 5xx*/
