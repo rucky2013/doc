@@ -1,14 +1,12 @@
 import dbStroage from './db'
 const Doc = {
-  getDocs(userId, catalogId) {
-    return [
-      { code: 'user.get', id: 1 },
-      { code: 'doc.get', id: 2 },
-      { code: 'catalog.get', id: 3 }
-    ]
+  getDocs(roleId, catalogId) {
+    let sql = `SELECT f.* from t_e4s_db_function f, t_e4s_db_role_function rf where f.ID=rf.FUNCTION_ID and rf.ROLE_ID = ${roleId} and f.PARENT_ID = ${catalogId}`
+    return dbStroage.query(sql, {type: 'SELECT' })
   },
-  getDoc(docId) {
-    return dbStroage.query('select * from t_e4s_db_function_context where id = :docId', { replacements: { docId: docId }, row: true })
+  getDoc(roleId, docId) {
+    let sql = `select f.* from t_e4s_db_function f, t_e4s_db_role_function rf where f.id=rf.FUNCTION_ID and rf.ROLE_ID=${roleId} f.PARENT_ID <> "0"`
+    return dbStroage.query(sql, { type: 'SELECT' })
    }
 }
 export default Doc

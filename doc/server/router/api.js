@@ -1,29 +1,21 @@
 import {Router} from 'express'
-import Catalog from '../model/Catalog'
-import Doc from '../model/Doc'
+import Catalog from '../model/catalog'
+import Doc from '../model/doc'
+import checkLogin from '../middleware/checkLogin'
 const api = Router()
-
 
 api.post('/login', (req, res, next) => {
   
 })
 api.get('/catalog', (req, res) => {
-  let userId = req.body.userid
-  let catalogs = Catalog.getCatas(userId)
-  res.send(catalogs)
+  res.send(Catalog.getCatas(req.query.userId))
 })
-api.get('/catalog/:catalogid/doc', (req, res) => {
-  let userId = req.body.userid
-  let catalogId = req.params.catalogid
-  let docs = Doc.getDocs(userId, catalogId)
-  res.send(docs)
+api.get('/catalog/:catalogId/doc', (req, res) => {
+  res.send(Doc.getDocs(req.query.userId, req.params.catalogId))
 })
-api.get('/doc/:docid', (req, res) => {
-  res.send(Doc.getDoc(req.params.docid))
+api.get('/doc/:docId', (req, res) => {
+  res.send(Doc.getDoc(req.query.userId, req.params.docId))
 })
-api.get('/test', (req,res) => {
-  console.log('success')
-  res.send({abc:'123'})
-})
+
 
 export default api
