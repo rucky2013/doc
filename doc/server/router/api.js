@@ -9,19 +9,17 @@ api.post('/login', (req, res, next) => {
 })
 api.get('/catalog', (req, res) => {
   let userId = req.body.userid
-  let catalogs = Catalog.getByUserId(userId)
+  let catalogs = Catalog.getCatas(userId)
   res.send(catalogs)
 })
 api.get('/catalog/:catalogid/doc', (req, res) => {
   let userId = req.body.userid
-  let catalogId = req.param.catalogid
+  let catalogId = req.params.catalogid
   let docs = Doc.getDocs(userId, catalogId)
   res.send(docs)
 })
 api.get('/doc/:docid', (req, res) => {
-  let docId = req.param.docid
-  let doc = Doc.getDoc(docId)
-  res.send(doc)
+  res.send(Doc.getDoc(req.params.docid))
 })
 api.get('/test', (req,res) => {
   console.log('success')

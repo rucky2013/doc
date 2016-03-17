@@ -1,3 +1,4 @@
+import dbStroage from './db'
 const Doc = {
   getDocs(userId, catalogId) {
     return [
@@ -7,12 +8,7 @@ const Doc = {
     ]
   },
   getDoc(docId) {
-    return {
-      code: 'user.get',
-      name: '获取用户接口',
-      tags: ['标签1', '标签2'],
-      content: '## 接口'
-    }
-  }
+    return dbStroage.query('select * from t_e4s_db_function_context where id = :docId', { replacements: { docId: docId }, row: true })
+   }
 }
 export default Doc
