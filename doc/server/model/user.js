@@ -1,51 +1,16 @@
-import * as T from '../lib/tool'
-import api from '../api'
+import dbStroage from './db'
 
-let user = {}
-user.login = (data, cb) => {
-  let rq = api.token
-  data.mainCmd = rq.mainCmd
-  T.sa[rq.method](rq.url)
-    .query(data)
-    .on('error', err=> {
-      console.log('fuck', err)
-    })
-    .end((err, res = {}) => {
-      if (err) {
-        return cb(err)
-      }
-      let resText
-      try {
-        resText = JSON.parse(res.text)
-      } catch (e) {
-        return cb(e)
-      }
-      cb(null, {
-        userInfo: resText.authcBody.userInfo,
-        accessToken: resText.authcHead.accessToken,
-        refreshToken: resText.authcHead.refreshToken
-      })
-    })
+const User = {
+  getUserByName: (userName) => {
+    let sql = `select * from t_e4s_db_user where login_name = "${userName}"`
+
+    return dbStroage.query(sql, {type: 'SELECT'})
+  },
+  getUserRoleId: userId => {
+    let sql = `select role_id from t_e4s_db_user_role where user_id = "${userId}"`
+
+    return dbStroage.query(sql, {type: 'SELECT'})
+  }
 }
 
-user.add = (data, cb) => {
-  let rq = api.user_add
-  T.sa[rq.method](rq.url)
-    .set('Content-Type', 'application/json')
-    .send(data)
-    .end((err, res = {}) => {
-      if (err) {
-        return cb(err)
-      }
-      let resText
-     
-      try {
-        resText = JSON.parse(res.text)
-        console.log(resText)
-      } catch (e) {
-        return cb(e)
-      }
-      cb(null, resText)
-    })
-}
-export default user
+export default User

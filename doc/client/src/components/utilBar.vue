@@ -38,7 +38,7 @@ export default {
   background: #f8f8f8;
   box-shadow: 2px 0 2px #ececec;
   padding: 10px 18px;
-  z-index: 9999;
+  z-index: 2;
   .m-logo{
     height: 80px;
     padding-bottom: 10px;
