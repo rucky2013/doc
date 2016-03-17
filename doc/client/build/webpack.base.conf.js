@@ -47,12 +47,12 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.less$/,
-        loader: 'style!css!less'
-      },
-      {
         test: /\.css$/,
         loader: 'style!css'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
       },
       {
         test: /\.json$/,
