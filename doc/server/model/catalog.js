@@ -1,5 +1,5 @@
 const Catalog = {
-  getCatas(userId) {
+  getByUserId(userId, catalogId) {
     return [
       { name: '分类1', id: 1 },
       { name: '分类2', id: 2 },
