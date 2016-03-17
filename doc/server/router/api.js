@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import Catalog from '../model/catalog'
 import Doc from '../model/doc'
+import User from '../model/user'
 import checkLogin from '../middleware/checkLogin'
 const api = Router()
 
