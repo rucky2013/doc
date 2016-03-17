@@ -7,4 +7,4 @@ const Catalog = {
     ]
   }
 }
-export default Doc
+export default Catalog
