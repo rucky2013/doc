@@ -18,6 +18,7 @@
 
 <script>
 import crypto from 'crypto'
+import cookie from '../cookieUtils'
 
 export default {
   data () {
@@ -29,12 +30,6 @@ export default {
     }
   },
   methods: {
-    setCookie (name, value) {
-      let Days = 30
-      let exp = new Date()
-      exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
-      document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
-    },
     confirmName () {
       if (!this.username) {
         this.isN = true
@@ -63,7 +58,7 @@ export default {
         console.log(res)
         switch (res.data.errorCode) {
           case 0:
-            this.setCookie('loginStatus', 1)
+            cookie.setCookie('loginStatus', 1)
             this.$parent.loginStatus = true
             break
           case 1:

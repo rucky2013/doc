@@ -10,6 +10,7 @@ require('../static/style/global.less')
 import login from './components/login'
 import utilBar from './components/utilBar'
 import catalog from './components/catalog'
+import cookie from './cookieUtils'
 
 export default {
   data () {
@@ -18,25 +19,14 @@ export default {
       loginStatus: false
     }
   },
-  methods: {
-    getCookie (name) {
-      let arr = []
-      let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
-      if (document.cookie.match(reg)) {
-        arr = document.cookie.match(reg)
-        return unescape(arr[2])
-      }
-      return null
-    }
-  },
   components: {
     'login': login,
     'util-bar': utilBar,
     'catalog': catalog
   },
   ready () {
-    console.log(this.getCookie('loginStatus'))
-    this.loginStatus = ~~this.getCookie('loginStatus')
+    console.log(cookie.getCookie('loginStatus'))
+    this.loginStatus = ~~cookie.getCookie('loginStatus')
   }
 }
 </script>

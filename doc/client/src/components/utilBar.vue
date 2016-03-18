@@ -11,17 +11,23 @@
         &#xe681;
       </a>
     </div>
-    <a class="m-logout iconfont">
+    <a class="m-logout iconfont" href="javascript:;" @click="logout">
       &#xe629;
     </a>
   </div>
 </template>
 
 <script>
+import cookie from '../cookieUtils'
+
 export default {
   methods: {
     docs () {
       this.$parent.status = !this.$parent.status
+    },
+    logout () {
+      cookie.delCookie('loginStatus')
+      this.$parent.loginStatus = false
     }
   },
   props: ['status']
