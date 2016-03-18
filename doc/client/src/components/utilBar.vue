@@ -4,7 +4,7 @@
       
     </div>
     <div class="m-body">
-      <a class="u-item iconfont" href="javascript:;" @click="docs">
+      <a class="u-item iconfont" href="javascript:;" @click="toggleCatalog">
         &#x344e;
       </a>
       <a class="u-item iconfont" href="javascript:;">
@@ -22,15 +22,18 @@ import cookie from '../cookieUtils'
 
 export default {
   methods: {
-    docs () {
-      this.$parent.status = !this.$parent.status
-    },
     logout () {
       cookie.delCookie('loginStatus')
       this.$parent.loginStatus = false
+    },
+    toggleCatalog () {
+      this.$parent.catalogStatus = !this.$parent.catalogStatus
+      if (this.$parent.catalogStatus) {
+        console.log('x')
+      }
     }
   },
-  props: ['status']
+  props: ['catalogStatus']
 }
 </script>
 

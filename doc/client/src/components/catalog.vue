@@ -1,19 +1,32 @@
 <template>
-  <div v-show="status" transition="expand" class="g-type">
+  <div v-show="catalogStatus" transition="expand" class="g-type">
     <div class="m-tit">
       类别
     </div>
     <ul class="m-body">
-      <li>类别一</li>
-      <li>类别二</li>
-      <li>类别三</li>
+      <li v-for="catalog in catalogs">
+        {{ catalog.FUNCTION_NAME }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['status']
+    props: ['catalogStatus'],
+    data () {
+      return {
+        catalogs: []
+      }
+    },
+    ready () {
+      this.$http
+      .get('api/catalog')
+      .then(res => {
+        console.log(res.data[0].FUNCTION_NAME)
+        this.catalogs = res.data
+      })
+    }
   }
 </script>
 

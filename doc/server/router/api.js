@@ -33,8 +33,9 @@ api.post('/login', (req, res, next) => {
     }
   })
 })
-api.get('/catalog', checkLogin, (req, res) => {
-  res.send(Catalog.getCatas(req.session.roleId))
+api.get('/catalog', (req, res) => {
+  console.log(req.session.roleId,'xxxxxx')
+  res.send(Catalog.getCatas(1))
 })
 api.get('/catalog/:catalogId/doc', checkLogin, (req, res) => {
   res.send(Doc.getDocs(req.session.roleId, req.params.catalogId))
