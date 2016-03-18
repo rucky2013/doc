@@ -29,6 +29,12 @@ export default {
     }
   },
   methods: {
+    setCookie (name, value) {
+      let Days = 30
+      let exp = new Date()
+      exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
+      document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
+    },
     confirmName () {
       if (!this.username) {
         this.isN = true
@@ -51,14 +57,14 @@ export default {
         username: this.username,
         pwd: crypto.createHash('md5').update(this.pwd).digest('hex')
       }
-      console.log(data.pwd)
       this
       .$http.post('api/login', data)
       .then((res) => {
         console.log(res)
         switch (res.data.errorCode) {
           case 0:
-            this.$parent.loginStatus = false
+            this.setCookie('loginStatus', 1)
+            this.$parent.loginStatus = true
             break
           case 1:
             this.isP = true
