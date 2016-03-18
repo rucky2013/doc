@@ -1,5 +1,5 @@
 <template>
-  <login v-if="loginStatus"></login>
+  <login v-if="!loginStatus"></login>
   <util-bar></util-bar>
   <catalog :catalogStatus="catalogStatus"></catalog>
 </template>
@@ -18,10 +18,25 @@ export default {
       loginStatus: true
     }
   },
+  methods: {
+    getCookie (name) {
+      let arr = []
+      let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
+      if (document.cookie.match(reg)) {
+        arr = document.cookie.match(reg)
+        return unescape(arr[2])
+      }
+      return null
+    }
+  },
   components: {
     'login': login,
     'util-bar': utilBar,
     'catalog': catalog
+  },
+  ready () {
+    console.log(this.getCookie('loginStatus'))
+    this.loginStatus = ~~this.getCookie('loginStatus')
   }
 }
 </script>
