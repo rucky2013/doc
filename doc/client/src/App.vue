@@ -1,7 +1,7 @@
 <template>
   <login v-if="loginStatus"></login>
   <util-bar></util-bar>
-  <catalog :status="status"></catalog>
+  <catalog :catalogStatus="catalogStatus"></catalog>
 </template>
 
 <script>
@@ -14,13 +14,8 @@ import catalog from './components/catalog'
 export default {
   data () {
     return {
-      status: false,
+      catalogStatus: false,
       loginStatus: true
-    }
-  },
-  computed: {
-    test () {
-      return this.status
     }
   },
   components: {

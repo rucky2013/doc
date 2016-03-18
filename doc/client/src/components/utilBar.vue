@@ -4,7 +4,7 @@
       
     </div>
     <div class="m-body">
-      <a class="u-item iconfont" href="javascript:;" @click="docs">
+      <a class="u-item iconfont" href="javascript:;" @click="toggleCatalog">
         &#x344e;
       </a>
       <a class="u-item iconfont" href="javascript:;">
@@ -20,11 +20,14 @@
 <script>
 export default {
   methods: {
-    docs () {
-      this.$parent.status = !this.$parent.status
+    toggleCatalog () {
+      this.$parent.catalogStatus = !this.$parent.catalogStatus
+      if (this.$parent.catalogStatus) {
+        console.log('x')
+      }
     }
   },
-  props: ['status']
+  props: ['catalogStatus']
 }
 </script>
 
