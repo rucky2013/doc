@@ -113,6 +113,7 @@ export default {
           margin-top: 30px;
         }
         input{
+          outline: none;
           display: block;
           height: 30px;
           width: 80%;

@@ -7,7 +7,7 @@
       <a class="u-item iconfont" href="javascript:;" @click="toggleCatalog">
         &#x344e;
       </a>
-      <a class="u-item iconfont" href="javascript:;">
+      <a class="u-item iconfont" href="javascript:;" @click="toggleSearch">
         &#xe681;
       </a>
     </div>
@@ -31,6 +31,9 @@ export default {
       if (this.$parent.catalogStatus) {
         console.log('x')
       }
+    },
+    toggleSearch () {
+      this.$parent.searchStatus = !this.$parent.searchStatus
     }
   },
   props: ['catalogStatus']

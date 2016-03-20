@@ -1,6 +1,6 @@
 const checkLogin = (req, res, next)=>{
   if (!req.session.userId) {
-    return res.redirect('/')
+    return res.send({err:1})
   }
   next()
 }

@@ -58,7 +58,6 @@
       li:hover{
         background: #FF4D61;
         color: #fff;
-        border-bottom: none;
       }
     }
   }

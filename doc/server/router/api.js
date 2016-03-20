@@ -18,14 +18,12 @@ api.post('/login', (req, res, next) => {
       User.getUserRoleId(result.ID).then( roleArray => {
         var role_id = roleArray[0].role_id
         req.session.roleId = role_id
+        result.errorDescription = '登录成功'
+        result.errorCode = 0
+
+        res.send(result)  
       })
-
-      result.errorDescription = '登录成功'
-      result.errorCode = 0
-
-      res.send(result)  
     } else {
-
       result.errorDescription = '密码错误'
       result.errorCode = 1
 
@@ -41,7 +39,13 @@ api.get('/catalog/:catalogId/doc', checkLogin, (req, res) => {
   res.send(Doc.getDocs(req.session.roleId, req.params.catalogId))
 })
 api.get('/doc/:docId', checkLogin, (req, res) => {
+  console.log('find doc!!!')
+  console.log(req.session.roleId,req.params.docId)
   res.send(Doc.getDoc(req.session.roleId, req.params.docId))
+})
+api.post('/search', checkLogin, (req,res) => {
+  console.log(req.session.roleId, 'roleId')
+  res.send(Doc.getSearchDocs(req.session.roleId, req.body.docName))
 })
 
 
