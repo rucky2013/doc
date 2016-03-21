@@ -20,21 +20,29 @@
 <script>
 import cookie from '../cookieUtils'
 import store from '../store/store'
+import {login, catalogs, search} from '../store/action'
 
 export default {
+  vuex: {
+    actions: {
+      login,
+      catalogs,
+      search
+    }
+  },
   methods: {
     logout () {
       cookie.delCookie('loginStatus')
-      store.dispatch('LOGIN', true)
+      this.login(true)
     },
     toggleCatalog () {
-      store.dispatch('CATALOGS', !store.state.catalogStatus)
+      this.catalogs(!store.state.catalogStatus)
       if (store.state.catalogStatus) {
         console.log('x')
       }
     },
     toggleSearch () {
-      store.dispatch('SEARCH', !store.state.searchStatus)
+      this.search(!store.state.searchStatus)
     }
   },
   props: ['catalogStatus']

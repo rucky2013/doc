@@ -19,7 +19,9 @@ export default {
   store,
   vuex: {
     getters: {
-      loginStatus: store => store.loginStatus
+      loginStatus: store => store.loginStatus,
+      catalogStatus: store => store.catalogStatus,
+      searchStatus: store => store.searchStatus
     },
     actions: actions
   },
