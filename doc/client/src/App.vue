@@ -1,5 +1,5 @@
 <template>
-  <login v-if="!loginStatus"></login>
+  <login v-if="loginStatus"></login>
   <util-bar></util-bar>
   <catalog v-show="catalogStatus" transition="expand"></catalog>
   <search v-if="searchStatus"></search>
@@ -13,13 +13,18 @@ import utilBar from './components/utilBar'
 import catalog from './components/catalog'
 import search from './components/search'
 import cookie from './cookieUtils'
+import store from './store/store'
 
 export default {
-  data () {
-    return {
-      catalogStatus: false,
-      loginStatus: true,
-      searchStatus: true
+  computed: {
+    loginStatus () {
+      return store.state.loginStatus
+    },
+    catalogStatus () {
+      return store.state.catalogStatus
+    },
+    searchStatus () {
+      return store.state.searchStatus
     }
   },
   components: {
@@ -29,8 +34,8 @@ export default {
     'search': search
   },
   ready () {
-    console.log(cookie.getCookie('loginStatus'))
-    this.loginStatus = ~~cookie.getCookie('loginStatus')
+    console.log(store.actions)
+    store.dispatch('LOGIN', !~~cookie.getCookie('loginStatus'))
   }
 }
 </script>

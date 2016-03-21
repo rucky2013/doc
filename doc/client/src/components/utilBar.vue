@@ -19,21 +19,22 @@
 
 <script>
 import cookie from '../cookieUtils'
+import store from '../store/store'
 
 export default {
   methods: {
     logout () {
       cookie.delCookie('loginStatus')
-      this.$parent.loginStatus = false
+      store.dispatch('LOGIN', true)
     },
     toggleCatalog () {
-      this.$parent.catalogStatus = !this.$parent.catalogStatus
-      if (this.$parent.catalogStatus) {
+      store.dispatch('CATALOGS', !store.state.catalogStatus)
+      if (store.state.catalogStatus) {
         console.log('x')
       }
     },
     toggleSearch () {
-      this.$parent.searchStatus = !this.$parent.searchStatus
+      store.dispatch('SEARCH', !store.state.searchStatus)
     }
   },
   props: ['catalogStatus']

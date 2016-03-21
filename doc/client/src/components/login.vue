@@ -19,6 +19,7 @@
 <script>
 import crypto from 'crypto'
 import cookie from '../cookieUtils'
+import store from '../store/store'
 
 export default {
   data () {
@@ -59,7 +60,7 @@ export default {
         switch (res.data.errorCode) {
           case 0:
             cookie.setCookie('loginStatus', 1)
-            this.$parent.loginStatus = true
+            store.dispatch('LOGIN', false)
             break
           case 1:
             this.isP = true
