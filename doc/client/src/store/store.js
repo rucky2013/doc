@@ -21,12 +21,7 @@ const mutations = {
   }
 }
 
-const actions = {
-  login: 'LOGIN'
-}
-
 export default new Vuex.Store({
   state,
-  mutations,
-  actions
+  mutations
 })

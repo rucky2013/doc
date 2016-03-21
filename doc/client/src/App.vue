@@ -14,18 +14,14 @@ import catalog from './components/catalog'
 import search from './components/search'
 import cookie from './cookieUtils'
 import store from './store/store'
-
+import * as actions from './store/action'
 export default {
-  computed: {
-    loginStatus () {
-      return store.state.loginStatus
+  store,
+  vuex: {
+    getters: {
+      loginStatus: store => store.loginStatus
     },
-    catalogStatus () {
-      return store.state.catalogStatus
-    },
-    searchStatus () {
-      return store.state.searchStatus
-    }
+    actions: actions
   },
   components: {
     'login': login,
@@ -34,8 +30,7 @@ export default {
     'search': search
   },
   ready () {
-    console.log(store.actions)
-    store.dispatch('LOGIN', !~~cookie.getCookie('loginStatus'))
+    this.login(!~~cookie.getCookie('loginStatus'))
   }
 }
 </script>

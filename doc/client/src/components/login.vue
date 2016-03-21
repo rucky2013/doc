@@ -19,8 +19,7 @@
 <script>
 import crypto from 'crypto'
 import cookie from '../cookieUtils'
-import store from '../store/store'
-
+import {login} from '../store/action'
 export default {
   data () {
     return {
@@ -28,6 +27,11 @@ export default {
       pwd: '',
       isN: false,
       isP: false
+    }
+  },
+  vuex: {
+    actions: {
+      login
     }
   },
   methods: {
@@ -60,7 +64,7 @@ export default {
         switch (res.data.errorCode) {
           case 0:
             cookie.setCookie('loginStatus', 1)
-            store.dispatch('LOGIN', false)
+            this.login(false)
             break
           case 1:
             this.isP = true
