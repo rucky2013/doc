@@ -1,5 +1,5 @@
 <template>
-  <div v-show="catalogStatus" transition="expand" class="g-type">
+  <div class="g-type">
     <div class="m-tit">
       类别
     </div>
@@ -13,7 +13,6 @@
 
 <script>
   export default {
-    props: ['catalogStatus'],
     data () {
       return {
         catalogs: []
@@ -60,14 +59,5 @@
         color: #fff;
       }
     }
-  }
-  .expand-transition{
-    left: 118px;
-    opacity: 1;
-    transition: all .3s ease;
-  }
-  .expand-enter, .expand-leave{
-    opacity: 0;
-    left:0px;
   }
 </style>

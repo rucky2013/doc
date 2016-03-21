@@ -1,7 +1,7 @@
 <template>
   <login v-if="!loginStatus"></login>
   <util-bar></util-bar>
-  <catalog :catalog-status="catalogStatus"></catalog>
+  <catalog v-show="catalogStatus" transition="expand"></catalog>
   <search v-if="searchStatus"></search>
 </template>
 
@@ -34,3 +34,15 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+  .expand-transition{
+    left: 118px;
+    opacity: 1;
+    transition: all .3s ease;
+  }
+  .expand-enter, .expand-leave{
+    opacity: 0;
+    left:0px;
+  }
+</style>
