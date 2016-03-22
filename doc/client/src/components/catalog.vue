@@ -4,7 +4,10 @@
       类别
     </div>
     <ul class="m-body">
-      <li v-for="catalog in catalogs">
+      <li 
+      v-for="catalog in catalogs" 
+      :class="{ 'current': current === $index }"
+      @click="selectCata($index, catalog.ID)">
         {{ catalog.FUNCTION_NAME }}
       </li>
     </ul>
@@ -12,19 +15,20 @@
 </template>
 
 <script>
+  import {getCatalog, selectCata} from '../vuex/action'
   export default {
-    data () {
-      return {
-        catalogs: []
+    vuex: {
+      getters: {
+        catalogs: ({catalog}) => catalog.all,
+        current: ({catalog}) => catalog.current
+      },
+      actions: {
+        getCatalog,
+        selectCata
       }
     },
-    ready () {
-      this.$http
-      .get('api/catalog')
-      .then(res => {
-        console.log(res.data[0].FUNCTION_NAME)
-        this.catalogs = res.data
-      })
+    created () {
+      this.getCatalog()
     }
   }
 </script>
@@ -54,7 +58,7 @@
         font-style: italic;
         border-bottom: 2px solid #FFF;
       }
-      li:hover{
+      li:hover, li.current{
         background: #FF4D61;
         color: #fff;
       }

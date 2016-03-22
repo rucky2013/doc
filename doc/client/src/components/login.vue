@@ -7,10 +7,10 @@
       </div>
       <div class="m-form">
         <p>用户名：</p>
-        <input :class="{'error-tip': isN}" v-model="username" @change="confirmName" type="text" placeholder="请输入用户名">
+        <input :class="{'error-tip': !isN}" v-model="username" @change="confirmName" type="text" placeholder="请输入用户名">
         <p class="f-mr-t">密码：</p>
-        <input :class="{'error-tip': isP}" type="password" v-model="pwd" @change="confirmPwd" placeholder="请输入密码">
-        <button @click="subF" class="u-btn">登录</button>
+        <input :class="{'error-tip': !isP}" type="password" v-model="pwd" @change="confirmPwd" placeholder="请输入密码">
+        <button @click="subForm" class="u-btn">登录</button>
       </div>
     </div>
   </div>
@@ -18,15 +18,14 @@
 
 <script>
 import crypto from 'crypto'
-import cookie from '../cookieUtils'
-import {login} from '../store/action'
+import {login} from '../vuex/action'
 export default {
   data () {
     return {
       username: '',
       pwd: '',
-      isN: false,
-      isP: false
+      isN: true,
+      isP: true
     }
   },
   vuex: {
@@ -36,20 +35,12 @@ export default {
   },
   methods: {
     confirmName () {
-      if (!this.username) {
-        this.isN = true
-        return
-      }
-      this.isN = false
+      this.isN = !!this.username
     },
     confirmPwd () {
-      if (!this.pwd) {
-        this.isP = true
-        return
-      }
-      this.isP = false
+      this.isP = !!this.pwd
     },
-    subF () {
+    subForm () {
       if (!this.username || !this.pwd) {
         return
       }
@@ -60,21 +51,12 @@ export default {
       this
       .$http.post('api/login', data)
       .then((res) => {
-        console.log(res)
-        switch (res.data.errorCode) {
-          case 0:
-            cookie.setCookie('loginStatus', 1)
-            this.login(false)
-            break
-          case 1:
-            this.isP = true
-            break
-          default:
-            console.log('shabi')
-            break
+        if (!res.data.errorCode) {
+          this.login()
+        } else {
+          this.isP = false
         }
-      },
-      (err) => {
+      }, (err) => {
         console.log(err, 'error')
       })
     }

@@ -11,7 +11,7 @@ const Doc = {
                and f.ID = fc.ID 
                and rf.ROLE_ID = "1"
                and f.PARENT_ID > 0 
-               and fc.ID = 2586`
+               and fc.ID = ${docId}`
     return dbStroage.query(sql, { type: 'SELECT' })
   },
   getSearchDocs(roleId, docName) {

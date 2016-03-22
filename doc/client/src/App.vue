@@ -1,38 +1,44 @@
 <template>
-  <login v-if="loginStatus"></login>
+  <login v-if="!loginStatus"></login>
   <util-bar></util-bar>
   <catalog v-show="catalogStatus" transition="expand"></catalog>
+  <list v-show="listStatus"></list>
+  <doc></doc>
   <search v-if="searchStatus"></search>
 </template>
 
 <script>
-require('normalize.css')
-require('../static/style/global.less')
 import login from './components/login'
 import utilBar from './components/utilBar'
 import catalog from './components/catalog'
+import list from './components/list'
+import doc from './components/doc'
 import search from './components/search'
-import cookie from './cookieUtils'
-import store from './store/store'
-import * as actions from './store/action'
+import cookie from './vuex/middlewares/cookieUtils'
+import {login as doLogin} from './vuex/action'
 export default {
-  store,
   vuex: {
     getters: {
-      loginStatus: store => store.loginStatus,
-      catalogStatus: store => store.catalogStatus,
-      searchStatus: store => store.searchStatus
+      loginStatus: ({status}) => status.loginStatus,
+      catalogStatus: ({status}) => status.catalogStatus,
+      searchStatus: ({status}) => status.searchStatus,
+      listStatus: ({status}) => status.listStatus,
+      docStatus: ({status}) => status.docStatus
     },
-    actions: actions
+    actions: {
+      doLogin
+    }
   },
   components: {
     'login': login,
     'util-bar': utilBar,
     'catalog': catalog,
+    'list': list,
+    'doc': doc,
     'search': search
   },
-  ready () {
-    this.login(!~~cookie.getCookie('loginStatus'))
+  created () {
+    ~~cookie.getCookie('loginStatus') && this.doLogin()
   }
 }
 </script>

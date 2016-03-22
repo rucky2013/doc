@@ -39,8 +39,9 @@ api.get('/catalog/:catalogId/doc', checkLogin, (req, res) => {
   res.send(Doc.getDocs(req.session.roleId, req.params.catalogId))
 })
 api.get('/doc/:docId', checkLogin, (req, res) => {
-  console.log('find doc!!!')
-  console.log(req.session.roleId,req.params.docId)
+  Doc.getDoc(req.session.roleId, req.params.docId).then(res => {
+    console.log(res,'xxxxxx')
+  })
   res.send(Doc.getDoc(req.session.roleId, req.params.docId))
 })
 api.post('/search', checkLogin, (req,res) => {

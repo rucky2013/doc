@@ -1,56 +1,34 @@
 <template>
-  <div class="g-sideBar">
-    <div class="m-logo">
+  <div class="utilBar">
+    <div class="logo">
       
     </div>
-    <div class="m-body">
-      <a class="u-item iconfont" href="javascript:;" @click="toggleCatalog">
+    <div class="items">
+      <a class="item iconfont" href="javascript:;" @click="toggleCatalog">
         &#x344e;
       </a>
-      <a class="u-item iconfont" href="javascript:;" @click="toggleSearch">
+      <a class="item iconfont" href="javascript:;" @click="toggleSearch">
         &#xe681;
       </a>
     </div>
-    <a class="m-logout iconfont" href="javascript:;" @click="logout">
+    <a class="logout iconfont" href="javascript:;" @click="logout">
       &#xe629;
     </a>
   </div>
 </template>
 
 <script>
-import cookie from '../cookieUtils'
-import store from '../store/store'
-import {login, catalogs, search} from '../store/action'
+import * as actions from '../vuex/action'
 
 export default {
   vuex: {
-    actions: {
-      login,
-      catalogs,
-      search
-    }
-  },
-  methods: {
-    logout () {
-      cookie.delCookie('loginStatus')
-      this.login(true)
-    },
-    toggleCatalog () {
-      this.catalogs(!store.state.catalogStatus)
-      if (store.state.catalogStatus) {
-        console.log('x')
-      }
-    },
-    toggleSearch () {
-      this.search(!store.state.searchStatus)
-    }
-  },
-  props: ['catalogStatus']
+    actions: actions
+  }
 }
 </script>
 
 <style lang="less" scoped>
-.g-sideBar{
+.utilBar{
   position: fixed;
   left: 0;
   top: 0;
@@ -60,34 +38,34 @@ export default {
   box-shadow: 2px 0 2px #ececec;
   padding: 10px 18px;
   z-index: 2;
-  .m-logo{
-    height: 80px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid #FFF;
-  }
-  .m-body{
-    height: 450px;
-    padding: 20px 15px;
-    .u-item{
-      display: block;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-      text-decoration: none;
-      margin-bottom: 10px;
-    }
-  }
-  .m-logout{
+}
+.logo{
+  height: 80px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #FFF;
+}
+.items{
+  height: 450px;
+  padding: 20px 15px;
+  .item{
     display: block;
-    text-align: center;
     height: 50px;
     line-height: 50px;
+    text-align: center;
     font-size: 2rem;
-    border-top: 3px solid #fff;
-    padding-top: 10px;
+    cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    margin-bottom: 10px;
   }
+}
+.logout{
+  display: block;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 2rem;
+  border-top: 3px solid #fff;
+  padding-top: 10px;
 }
 </style>
