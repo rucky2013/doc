@@ -1,18 +1,13 @@
 <template>
   <div class="utilBar">
-    <div class="logo">
-      
-    </div>
+    <div class="logo iconfont icon-dog"></div>
     <div class="items">
-      <a class="item iconfont" href="javascript:;" @click="toggleCatalog">
-        &#x344e;
+      <a class="item iconfont icon-catalog" href="javascript:;" @click="toggleCatalog">
       </a>
-      <a class="item iconfont" href="javascript:;" @click="toggleSearch">
-        &#xe681;
+      <a class="item iconfont icon-search" href="javascript:;" @click="toggleSearch">
       </a>
     </div>
-    <a class="logout iconfont" href="javascript:;" @click="logout">
-      &#xe629;
+    <a class="logout iconfont icon-tuichuzhanghao" href="javascript:;" @click="logout">
     </a>
   </div>
 </template>
@@ -29,43 +24,42 @@ export default {
 
 <style lang="less" scoped>
 .utilBar{
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 80px;
+  position: absolute;
+  top:0;
+  left:0;
+  padding:40px 10px;
   height: 100%;
-  background: #f8f8f8;
-  box-shadow: 2px 0 2px #ececec;
-  padding: 10px 18px;
-  z-index: 2;
+  background: #f5f5f5;
+  box-shadow: 2px 0 2px #e5e5e5;
+  z-index:4;
 }
 .logo{
-  height: 80px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid #FFF;
+  font-size:42px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #fefefe;
+  color:#333;
+  text-align: center;
+  &:hover{
+    color:#FF4D61;
+  }
 }
 .items{
-  height: 450px;
-  padding: 20px 15px;
+  padding: 60px 0 100px;
   .item{
     display: block;
-    height: 50px;
-    line-height: 50px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 30px;
     cursor: pointer;
-    color: #000;
     text-decoration: none;
-    margin-bottom: 10px;
+    padding:15px;
   }
 }
 .logout{
   display: block;
   text-align: center;
-  height: 50px;
-  line-height: 50px;
-  font-size: 2rem;
-  border-top: 3px solid #fff;
-  padding-top: 10px;
+  font-size: 30px;
+  border-top: 2px solid #fefefe;
+  padding-top:40px;
 }
 </style>

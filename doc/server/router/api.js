@@ -5,6 +5,41 @@ import User from '../model/user'
 import checkLogin from '../middleware/checkLogin'
 const api = Router()
 
+// 给 api 的处理增加三个方法
+function extendAPIOutput (req, res, next) {
+  //响应成功
+  res.apiSuccess = data => {
+    res.json({
+      status: 'OK',
+      result: data
+    })
+  }
+
+  //响应错误 err 是一个对象
+  //包含了 error_code 和 error_msg
+  res.apiError = err => {
+    res.json({
+      status: 'Error',
+      error_code: err.error_code || '程序没有定义该错误编码',
+      error_msg:  err.error_msg || `程序没有定义错误消息，此处直接输出错误本身: ${err.toString()}`
+    })
+  }
+
+  //定义一个错误消息包装方法
+  req.createApiError = (code, msg) => {
+    let err = new Error(msg)
+    err.error_code = code
+    err.error_msg = msg
+    return err
+  }
+
+  //交由下面 api 中间件处理
+  next()
+}
+
+api.use(extendAPIOutput)
+// 用上面增加的方法来统一处理错误
+api.use((err, req, res, next) => res.apiError(err))
 
 //登录验证
 api.post('/login', (req, res, next) => {
@@ -18,35 +53,27 @@ api.post('/login', (req, res, next) => {
       User.getUserRoleId(result.ID).then( roleArray => {
         var role_id = roleArray[0].role_id
         req.session.roleId = role_id
-        result.errorDescription = '登录成功'
-        result.errorCode = 0
-
-        res.send(result)  
+        res.apiSuccess({loginStatu:1})
       })
     } else {
-      result.errorDescription = '密码错误'
-      result.errorCode = 1
-
-      res.send(result)
+      let err = req.createApiError(748, '密码错误，别乱来')
+      res.apiError(err)
     }
+  }, err => {
+    res.apiError(err)
   })
 })
 api.get('/catalog', (req, res) => {
-  console.log(req.session.roleId,'xxxxxx')
-  res.send(Catalog.getCatas(1))
+  res.apiSuccess(Catalog.getCatas(req.session.roleId))
 })
 api.get('/catalog/:catalogId/doc', checkLogin, (req, res) => {
-  res.send(Doc.getDocs(req.session.roleId, req.params.catalogId))
+  res.apiSuccess(Doc.getDocs(req.session.roleId, req.params.catalogId))
 })
 api.get('/doc/:docId', checkLogin, (req, res) => {
-  Doc.getDoc(req.session.roleId, req.params.docId).then(res => {
-    console.log(res,'xxxxxx')
-  })
-  res.send(Doc.getDoc(req.session.roleId, req.params.docId))
+  res.apiSuccess(Doc.getDoc(req.session.roleId, req.params.docId))
 })
 api.post('/search', checkLogin, (req,res) => {
-  console.log(req.session.roleId, 'roleId')
-  res.send(Doc.getSearchDocs(req.session.roleId, req.body.docName))
+  res.apiSuccess(Doc.getSearchDocs(req.session.roleId, req.body.docName))
 })
 
 

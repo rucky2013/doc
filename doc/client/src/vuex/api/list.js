@@ -4,7 +4,15 @@ export default {
     Vue.http
       .get(`api/catalog/${catalogId}/doc`)
       .then(res => {
-        cb(res.data)
+        let data = res.data
+        if (data.status === 'OK') {
+          cb(data.result)
+        } else {
+          console.error('服务端返回错误', data.errMsg)
+        }
+      }, err => {
+        console.error('接口调用失败', err)
       })
   }
 }
+

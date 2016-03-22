@@ -2,7 +2,6 @@ const state = {
   loginStatus: 0,
   catalogStatus: 0,
   listStatus: 0,
-  docStatus: 1,
   searchStatus: 0
 }
 
@@ -22,9 +21,6 @@ const mutations = {
   },
   TOGGLE_SEARCH (state) {
     state.searchStatus = !state.catalogStatus
-  },
-  TOGGLE_DOC (state) {
-    state.docStatus = !state.docStatus
   }
 }
 

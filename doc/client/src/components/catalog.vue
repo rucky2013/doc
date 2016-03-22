@@ -1,9 +1,9 @@
 <template>
-  <div class="g-type">
-    <div class="m-tit">
+  <div class="catalog m-list">
+    <div class="title">
       类别
     </div>
-    <ul class="m-body">
+    <ul class="list">
       <li 
       v-for="catalog in catalogs" 
       :class="{ 'current': current === $index }"
@@ -32,36 +32,46 @@
     }
   }
 </script>
-
-<style lang="less" scoped>
-  .g-type{
-    position: fixed;
-    top: 0;
-    height: 100%;
-    background: #ececec;
-    padding: 10px 20px;
-    .m-tit{
-      height: 80px;
-      line-height: 80px;
-      font-size: 1rem;
+<style scoped>
+  .catalog{
+    position: absolute;
+    z-index: 3;
+    border-right: 0;
+  }
+</style>
+<style lang="less">
+.m-list{
+  border-right:1px solid #ededed;
+  background-color: #fafafa;
+  height: 100%;
+  width: 170px;
+  text-align: center;
+  position: relative;
+  .title{
+    line-height: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color:#fff;
+    background-color: #FF4D61;
+    font-size:16px;
+  }
+  .list{
+    font-size:0;
+    li{
+      font-size:14px;
+      display: inline-block;
+      width: 140px;
+      cursor:pointer;
       text-align: center;
-      border-bottom: 3px solid #FFF;
-      padding-bottom: 10px;
+      padding: 10px 0;
+      overflow: hidden;
+      border-bottom: 1px dotted #999;
     }
-    .m-body{
-      margin-top: 10px;
-      overflow-y: scroll;
-      li{
-        width: 100px;
-        text-align: center;
-        padding: 10px 0;
-        font-style: italic;
-        border-bottom: 2px solid #FFF;
-      }
-      li:hover, li.current{
-        background: #FF4D61;
-        color: #fff;
-      }
+    li:hover, li.current{
+      color: #FF4D61;
+      border-bottom: 1px solid #FF4D61;
+      font-weight: bold;
     }
   }
+}
 </style>

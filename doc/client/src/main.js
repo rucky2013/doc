@@ -9,7 +9,7 @@ require('../static/style/global.less')
 Vue.use(resource)
 
 new Vue({
-  el: '#index',
+  el: '#app',
   store,
   components: { App }
 })

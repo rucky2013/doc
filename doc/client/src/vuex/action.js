@@ -10,7 +10,7 @@ export const login = ({ dispatch }) => {
 }
 export const toggleCatalog = ({ dispatch, state }) => {
   dispatch('TOGGLE_CATALOG')
-  state.status.catalogStatus || dispatch('TOGGLE_LIST', false)
+  // state.status.catalogStatus || dispatch('TOGGLE_LIST', false)
 }
 
 export const toggleList = makeAction('TOGGLE_LIST')
@@ -29,6 +29,7 @@ export const getCatalog = ({ dispatch }) => {
 export const selectCata = ({ dispatch }, index, catalogId) => {
   dispatch('SET_CURRENT_CATA', index)
   dispatch('SET_CURRENT_ITEM', null)
+  dispatch('TOGGLE_CATALOG')
   dispatch('TOGGLE_LIST', true)
   list.fetchList(catalogId, list => {
     dispatch('RECEIVE_LIST', list)
@@ -44,7 +45,6 @@ export const getList = ({ dispatch }) => {
 export const selectItem = ({ dispatch }, index, itemId) => {
   dispatch('SET_CURRENT_ITEM', index)
   doc.fetchDoc(itemId, doc => {
-    console.log(doc)
     dispatch('RECEIVE_DOC', doc)
   })
 }

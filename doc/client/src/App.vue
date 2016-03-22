@@ -1,10 +1,12 @@
 <template>
-  <login v-if="!loginStatus"></login>
-  <util-bar></util-bar>
-  <catalog v-show="catalogStatus" transition="expand"></catalog>
-  <list v-show="listStatus"></list>
-  <doc></doc>
-  <search v-if="searchStatus"></search>
+  <div class="container">
+    <login v-if="!loginStatus"></login>
+    <util-bar></util-bar>
+    <catalog v-show="catalogStatus" transition="expand"></catalog>
+    <list v-show="listStatus"></list>
+    <doc></doc>
+    <search v-if="searchStatus"></search>
+  </div>
 </template>
 
 <script>
@@ -43,14 +45,20 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+  .container{
+    position: relative;
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+  }
   .expand-transition{
-    left: 118px;
+    left:80px;
     opacity: 1;
     transition: all .3s ease;
   }
   .expand-enter, .expand-leave{
     opacity: 0;
-    left:0px;
+    left:-180px;
   }
 </style>

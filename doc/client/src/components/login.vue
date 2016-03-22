@@ -51,7 +51,7 @@ export default {
       this
       .$http.post('api/login', data)
       .then((res) => {
-        if (!res.data.errorCode) {
+        if (res.data.status === 'OK') {
           this.login()
         } else {
           this.isP = false
@@ -72,7 +72,7 @@ export default {
     width: 100%;
     height: 100%;
     background: #ececec;
-    z-index: 3;
+    z-index: 5;
     .m-top{
       height: 5px;
       width: 100%;
