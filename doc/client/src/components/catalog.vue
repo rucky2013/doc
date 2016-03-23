@@ -1,7 +1,7 @@
 <template>
   <div class="catalog m-list">
     <div class="title">
-      类别
+      炼油文档
     </div>
     <ul class="list">
       <li 
@@ -33,43 +33,47 @@
   }
 </script>
 <style scoped>
-  .catalog{
-    position: absolute;
-    z-index: 3;
-    border-right: 0;
-  }
+.catalog{
+  position: absolute;
+  z-index: 3;
+  border-right: 0;
+}
+.catalog.m-list{
+  background-color: #f3f3f3;
+}
 </style>
 <style lang="less">
 .m-list{
   border-right:1px solid #ededed;
   background-color: #fafafa;
   height: 100%;
-  width: 170px;
-  text-align: center;
+  width: 150px;
+  padding:0 10px;
   position: relative;
   .title{
-    line-height: 40px;
-    margin-bottom: 10px;
+    padding-top: 25px;
+    text-indent: 10px;
+    line-height: 35px;
+    text-indent: 16px;
+    margin-bottom: 5px;
     font-weight: bold;
-    color:#fff;
-    background-color: #FF4D61;
-    font-size:16px;
+    font-size:15px;
+    font-weight: bold;
+    color: #FF4D61;
   }
   .list{
     font-size:0;
     li{
       font-size:14px;
       display: inline-block;
-      width: 140px;
+      width: 100%;
       cursor:pointer;
-      text-align: center;
-      padding: 10px 0;
+      text-indent: 20px;
+      padding: 6px 0;
       overflow: hidden;
-      border-bottom: 1px dotted #999;
     }
     li:hover, li.current{
       color: #FF4D61;
-      border-bottom: 1px solid #FF4D61;
       font-weight: bold;
     }
   }

@@ -12,15 +12,14 @@ const mutations = {
   LOGOUT (state) {
     state.loginStatus = 0
   },
-  TOGGLE_CATALOG (state) {
-    console.log(state.catalogStatus)
-    state.catalogStatus = !state.catalogStatus
+  TOGGLE_CATALOG (state, opt = !state.catalogStatus) {
+    state.catalogStatus = opt
   },
   TOGGLE_LIST (state, opt = !state.listStatus) {
     state.listStatus = opt
   },
   TOGGLE_SEARCH (state) {
-    state.searchStatus = !state.catalogStatus
+    state.searchStatus = !state.searchStatus
   }
 }
 

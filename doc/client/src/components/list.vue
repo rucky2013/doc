@@ -1,7 +1,7 @@
 <template>
   <div class="lists m-list">
     <div class="title">
-      列表
+      {{ currentCata }}
     </div>
     <ul class="list">
       <li 
@@ -20,7 +20,10 @@
     vuex: {
       getters: {
         list: ({list}) => list.all,
-        current: ({list}) => list.current
+        current: ({list}) => list.current,
+        currentCata: ({catalog}) => {
+          return catalog.all[catalog.current].FUNCTION_NAME
+        }
       },
       actions: {
         getList,
@@ -33,7 +36,7 @@
 <style lang="less" scoped>
 .lists{
   position: absolute;
-  left:80px;
+  left:60px;
   z-index:2;
 }
 </style>

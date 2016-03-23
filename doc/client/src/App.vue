@@ -2,10 +2,10 @@
   <div class="container">
     <login v-if="!loginStatus"></login>
     <util-bar></util-bar>
-    <catalog v-show="catalogStatus" transition="expand"></catalog>
-    <list v-show="listStatus"></list>
+    <catalog v-if="catalogStatus" transition="expand"></catalog>
+    <list v-if="listStatus"></list>
     <doc></doc>
-    <search v-if="searchStatus"></search>
+    <search v-show="searchStatus"></search>
   </div>
 </template>
 
@@ -53,9 +53,9 @@ export default {
     overflow: hidden;
   }
   .expand-transition{
-    left:80px;
+    left:60px;
     opacity: 1;
-    transition: all .3s ease;
+    transition: all .3s ease-in-out;
   }
   .expand-enter, .expand-leave{
     opacity: 0;

@@ -49,6 +49,15 @@ export const selectItem = ({ dispatch }, index, itemId) => {
   })
 }
 
+// search
+
+export const selectSearchItem = ({ dispatch }, itemId) => {
+  doc.fetchDoc(itemId, doc => {
+    dispatch('RECEIVE_DOC', doc)
+  })
+  dispatch('TOGGLE_CATALOG', false)
+  dispatch('TOGGLE_LIST', false)
+}
 function makeAction (type) {
   return ({ dispatch }, ...args) => dispatch(type, ...args)
 }

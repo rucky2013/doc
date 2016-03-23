@@ -1,74 +1,43 @@
 <template>
-  <div class="search-body">
-    <div class="m-search">
-      <a class="i-search iconfont" @click="search">&#xe754;</a>
-      <input class="u-search" v-model="docName" type="text">
+  <div class="search">
+    <div class="input">
+      <i class="iconfont icon-search"></i>
+      <input v-model="keyword" type="text" placeholder="请输入接口名称" @keyup.enter="search">
     </div>
-    <ul class="m-item" v-show="status" class="search-list">
-      <li v-for="item in items" class="u-item">
-        <a href="javascript:;" @click="getDetail(item.ID)">{{ item.CONTEXT_NAME }}</a>
+    <ul class="results">
+      <li
+      v-for="result in results"
+      @click="selectSearchItem(result.ID)">
+        {{ result.CONTEXT_NAME }}
       </li>
     </ul>
-    <div class="m-detail" v-show="detailStatus">
-      <p>{{ name }}</p>
-      <div class="m-tags">
-        <span class="tag" v-for="tag in tags">{{ tag }}</span>
-      </div>
-      <p>{{ introduction }}</p>
-      <article>
-        {{ content }}
-      </article>
-    </div>
   </div>
 </template>
 
 <script>
+import {selectSearchItem} from '../vuex/action'
 export default {
+  vuex: {
+    actions: {
+      selectSearchItem
+    }
+  },
   data () {
     return {
       docName: '',
-      items: [],
-      status: true,
-      detailStatus: false,
-      name: '',
-      tags: [],
-      introduction: '',
-      content: ''
+      results: [],
+      keyword: ''
     }
   },
   methods: {
     search () {
-      let data = {
-        docName: this.docName
-      }
       this
-      .$http.post('api/search', data)
+      .$http.post('api/search', {docName: this.keyword})
       .then((res) => {
-        this.detailStatus = false
-        if (res.data.length > 0) {
-          console.log(res.data)
-          this.items = res.data
-          this.status = true
-          return
-        }
-        this.status = false
+        console.log(res.data)
+        this.results = res.data.result
       },
       (err) => {
-        console.log(err)
-      })
-    },
-    getDetail (id) {
-      this.status = false
-      this.detailStatus = true
-      this
-      .$http.get('api/doc/' + id)
-      .then(res => {
-        this.name = res.data[0].CONTEXT_NAME
-        this.tags = res.data[0].TAG.split('|')
-        this.introduction = res.data[0].INTRODUCE
-        this.content = res.data[0].CONTEXT
-      },
-      err => {
         console.log(err)
       })
     }
@@ -77,62 +46,53 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .search-body{
-    margin-top: 100px;
-    width: 800px;
-    margin-left: 500px;
-    .m-search{
-      position: relative;
-      height: 50px;
-      border-bottom: 2px solid #ececec;
-      padding: 20px 0;
-      .i-search{
-        position: absolute;
-        height: 52px;
-        width: 52px;
-        text-align: center;
-        line-height: 52px;
-        font-size: 36px;
-        color: #A19A9F;
-        font-weight: bold;
-      }
-      .u-search{
-        display: inline-block;
-        height: 50px;
-        width: 100%;
-        border: none;
-        text-indent: 60px;
-        font-size: 1.8rem;
-        font-style: italic;
-        outline: none;
-      }
+.search{
+  position: absolute;
+  width: 230px;
+  height: 100%;
+  background-color:rgba(250, 250, 250, 0.85);
+  box-shadow:1px 1px 4px #ccc;
+  top:0;
+  right:0;
+  z-index:3;
+  padding: 30px;
+  color:#666;
+}
+.input{
+  font-size:16px;
+  position: relative;
+  height: 30px;
+  margin-bottom: 40px;
+  i{
+    font-size:22px;
+    vertical-align:middle;
+    color:#999;
+    position: absolute;
+    left: 8px;
+    top:5px;
+  }
+  input{
+    width: 100%;
+    line-height: 34px;
+    height: 34px;
+    outline: none;
+    text-indent: 40px;
+    color:#333;
+    font-size: 14px;
+    background: none;
+    border:0;
+    border-bottom:1px solid #bbb;
+  }
+}
+.results{
+  text-indent: 20px;
+  li {
+    line-height: 30px;
+    cursor:pointer;
+    border-bottom:1px dotted #ccc;
+    &:hover{
+      color:#FF4D61;
     }
   }
-  .no-record{
-    text-align: left;
-    font-size: 2rem;
-    margin-top: 50px;
-    font-style: italic;
-  }
-  .m-item{
-    padding: 0 20px;
-    .u-item{
-      font-style: italic;
-      list-style: square;
-      a{
-        padding: 10px 20px;
-      }
-    } 
-  }
-  .m-detail{
-    padding: 20px;
-    .tag{
-      display: inline-block;
-      padding: 5px;
-      background: #F58F4A;
-      color: #fff;
-      margin-right: 10px;
-      border-radius: 5px;
-    }
-  }
+}
 </style>
