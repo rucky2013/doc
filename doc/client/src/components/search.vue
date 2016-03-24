@@ -61,7 +61,7 @@ export default {
       this.status = false
       this.detailStatus = true
       this
-      .$http.get('api/doc/' + id)
+      .$http.get(`api/doc/${id}`)
       .then(res => {
         this.name = res.data[0].CONTEXT_NAME
         this.tags = res.data[0].TAG.split('|')
@@ -81,6 +81,7 @@ export default {
     margin-top: 100px;
     width: 800px;
     margin-left: 500px;
+    z-index: 9999;
     .m-search{
       position: relative;
       height: 50px;

@@ -20,7 +20,7 @@ const mutations = {
     state.listStatus = opt
   },
   TOGGLE_SEARCH (state) {
-    state.searchStatus = !state.catalogStatus
+    state.searchStatus = !state.searchStatus
   }
 }
 
