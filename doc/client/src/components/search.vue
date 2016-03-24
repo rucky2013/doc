@@ -46,44 +46,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .search-body{
-    margin-top: 100px;
-    width: 800px;
-    margin-left: 500px;
-    z-index: 9999;
-    .m-search{
-      position: relative;
-      height: 50px;
-      border-bottom: 2px solid #ececec;
-      padding: 20px 0;
-      .i-search{
-        position: absolute;
-        height: 52px;
-        width: 52px;
-        text-align: center;
-        line-height: 52px;
-        font-size: 36px;
-        color: #A19A9F;
-        font-weight: bold;
-      }
-      .u-search{
-        display: inline-block;
-        height: 50px;
-        width: 100%;
-        border: none;
-        text-indent: 60px;
-        font-size: 1.8rem;
-        font-style: italic;
-        outline: none;
-      }
-    }
-  }
-  .no-record{
-    text-align: left;
-    font-size: 2rem;
-    margin-top: 50px;
-    font-style: italic;
-=======
 .search{
   position: absolute;
   width: 230px;
@@ -108,7 +70,6 @@ export default {
     position: absolute;
     left: 8px;
     top:5px;
->>>>>>> 41985b46a8cb224e5dcd6f9d65aaa03e10e3eb7d
   }
   input{
     width: 100%;
