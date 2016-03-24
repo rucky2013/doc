@@ -1,7 +1,7 @@
 <template>
   <div class="doc">
     <div class="content">
-      <h1>{{ doc.CONTEXT_NAME }}</h1>
+      <div class="title">{{ doc.CONTEXT_NAME }}</div>
       <ul class="tags">
         <li v-for="tag in tags">{{ tag }}</li>
       </ul>
@@ -54,21 +54,22 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    padding-left: 260px;
+    padding-left: 230px;
     box-sizing:border-box;
     background-color: #fff;
   }
   .content{
-    padding:20px 40px;
+    padding:30px 40px;
     color:#333;
   }
-  h1{
+  .title{
     font-size:22px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-indent: -2px;
   }
   .intro{
     font-size:14px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
   .tags{
     overflow: hidden;
@@ -76,10 +77,10 @@
     li{
       float: left;
       margin-right:10px;
-      padding:0 8px;
+      padding:0 6px;
       box-shadow:0 0 0 1px #FF4D61 inset;
       text-align: center;
-      line-height: 22px;
+      line-height: 20px;
       color:#FF4D61;
       border-radius:4px;
     }
